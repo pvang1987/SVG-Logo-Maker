@@ -24,5 +24,5 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
 ![Alt text](./examples/SVG-logo-tri.svg) ![Alt text](./examples/SVG-logo.svg) ![Alt text](./examples/SVG-logo-sq.svg)    
 
-Repository Link: https://github.com/pvang1987/SVG-Logo-Maker 
+Repository Link: https://github.com/pvang1987/SVG-Logo-Maker  
 Video Link: https://watch.screencastify.com/v/G6iJnoHgYdwDhScrZBBb 
