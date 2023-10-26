@@ -22,7 +22,7 @@ AND the output text "Generated logo.svg" is printed in the command line
 WHEN I open the `logo.svg` file in a browser  
 THEN I am shown a 300x200 pixel image that matches the criteria I entered  
 
-![Alt text](./examples/SVG-logo-tri.svg) ![Alt text](./examples/SVG-logo.svg) ![Alt text](./examples/SVG-logo-sq.svg)    
+![Triangle](./examples/SVG-tri.svg) ![Circle](./examples/SVG-cir.svg) ![Square](./examples/SVG-sq.svg)    
 
 Repository Link: https://github.com/pvang1987/SVG-Logo-Maker  
-Video Link: https://watch.screencastify.com/v/G6iJnoHgYdwDhScrZBBb 
+Video Link: https://watch.screencastify.com/v/l2V9naoE0qeuqRiJ1nv5  

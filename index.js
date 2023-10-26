@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
-const { Triangle, Circle, Square } = require('./lib/shapes');
+const Shape = require('./lib/shapes');
 
 // SVG prompts
 inquirer
@@ -10,15 +10,19 @@ inquirer
     {
       type: 'input',
       name: 'text',
-      message: 'Enter up to three characters:',
+      message: 'Enter at least 3 characters:',
       validate: function (value) {
-        return value.length <= 3;
+        // Check if the value has at least 3 characters
+        if (/^.{3,}$/.test(value)) {
+          return true; // Valid input
+        }
+        return 'Please enter at least 3 characters.';
       },
     },
     {
       type: 'input',
       name: 'textColor',
-      message: 'Enter a color keyword or hexadecimal number for text color:',
+      message: 'Pick a color or hex code for text color:',
     },
     {
       type: 'list',
@@ -29,7 +33,7 @@ inquirer
     {
       type: 'input',
       name: 'shapeColor',
-      message: 'Enter a color keyword or hexadecimal number for shape color:',
+      message: 'Pick a color or hex code for shape color:',
     },
     {
       type: 'input',
@@ -42,26 +46,19 @@ inquirer
     const svgWidth = 300; // Set the width of the SVG to 300
     const svgHeight = 200; // Set the height of the SVG to 200
 
-    // Determine the selected shape and define it
-    let shapeDefinition;
-    if (answers.shape === 'Triangle') {
-      shapeDefinition = `<polygon points="${svgWidth / 2},0 ${svgWidth},200 0,200" fill="${answers.shapeColor}" />`;
-    } else if (answers.shape === 'Circle') {
-      shapeDefinition = `<circle cx="${svgWidth / 2}" cy="${svgHeight / 2}" r="${100}" fill="${answers.shapeColor}" />`;
-    } else if (answers.shape === 'Square') {
-      shapeDefinition = `<rect x="0" y="0" width="${svgWidth}" height="${svgHeight}" fill="${answers.shapeColor}" />`;
-    }
-
+    // Create a shape instance based on the selected shape
+    const shape = new Shape(answers.shape, [svgWidth, svgHeight], answers.shapeColor);
+    
     // Calculate the text position within the SVG
     const textX = svgWidth / 2;
     const textY = svgHeight / 2 + 10;
 
-    // Generate the SVG markup with the selected shape
+    // Generate the SVG markup
     const svgMarkup = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}">
-      ${shapeDefinition} <!-- Render the selected shape -->
+      ${shape.render()} <!-- Render the selected shape -->
       <text x="${textX}" y="${textY}" font-size="40" text-anchor="middle" fill="${answers.textColor}">${answers.text}</text>
     </svg>`;
-
+    
     // Add the .svg extension to the filename
     const fileNameWithExtension = answers.fileName + '.svg';
 
